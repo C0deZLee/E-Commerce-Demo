@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Post new item</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/index/">Home</a>
+            </li>
+
+            <li class="active">
+                <strong>New Item</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>New Item</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#">Config option 1</a>
+                    </li>
+                    <li><a href="#">Config option 2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <form method="post" class="form-horizontal" action="/item/new/n/">
+                            {% csrf_token %}
+
+                <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10"><input id="name" required name="name" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Amount</label>
+                    <div class="col-sm-10"><input id="amount" required name="amount" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Description - Short</label>
+                    <div class="col-sm-10"><input id="dess" required name="dess" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Description - Full</label>
+                    <div class="col-sm-10"><input id="desl" name="desl" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Price</label>
+                    <div class="col-sm-10"><input id="price" required name="price" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Key words</label>
+                    <div class="col-sm-10"><input id="key" name="key" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Category</label>
+                    <div class="col-sm-10">
+                        <div class="col-lg-4 m-l-n"><select id="cate" required name="cate" class="form-control" multiple="">
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                            <option value="3">Category 3</option>
+                            <option value="4">Category 4</option>
+                        </select></div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button class="btn btn-white" type="reset">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        </div>
+{% endblock %}

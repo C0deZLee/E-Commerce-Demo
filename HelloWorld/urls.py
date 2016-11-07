@@ -34,9 +34,12 @@ urlpatterns = [
 	url(r'^item/$', item_view.list_view, name='item'),
 	url(r'^item/categ/(?P<categ>[0-9]*)/$', auth_view.login_view, name='item_categ'),
 	url(r'^item/id/(?P<pk>[0-9]*)/$', item_view.detail_view, name='item_id'),
+	url(r'^item/new/n/$', item_view.add_new_item_view, name='item_new'),
+
+
+	# Cart
 	url(r'^item/id/(?P<pk>[0-9]*)/addcart$', item_view.add_cart_view, name='item_add_cart'),
 	url(r'^item/id/(?P<pk>[0-9]*)/addbid$', item_view.add_bid_view, name='item_add_bid'),
-
 	url(r'^cart/$', item_view.cart_view, name='item_cart'),
 	url(r'^cart/remove/(?P<pk>[0-9]*)$', item_view.remove_cart_view, name='item_remove_cart'),
 

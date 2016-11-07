@@ -17,7 +17,7 @@ class RateAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-	list_display = ['level', 'name']
+	list_display = ['pk', 'level', 'name']
 
 
 class OrderAdmin(admin.ModelAdmin):
