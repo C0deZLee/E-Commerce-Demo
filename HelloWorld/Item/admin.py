@@ -21,7 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ('created', 'item', 'buyer')
+	list_display = ('created', 'item', 'buyer', 'status')
 	list_filter = ['created']
 
 

@@ -36,16 +36,11 @@
     <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-
             <div class="ibox product-detail">
                 <div class="ibox-content">
-
                     <div class="row">
                         <div class="col-md-5">
-
-
                             <div class="product-images">
-
                                 <div>
                                     <div class="image-imitation">
                                         [IMAGE 1]
@@ -61,9 +56,7 @@
                                         [IMAGE 3]
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                         <div class="col-md-7">
 
@@ -82,10 +75,11 @@
                                   <input class="form-control" id="newbid" type="text" name="newbid" maxlength="100" required />
                                 </div>
                                 </form>
-                                <h1 class="product-main-price">Current ${{ item.bid.current_price }} <small class="text-muted">Exclude Tax</small> </h1>
+                                <h1 class="product-main-price">Current <strong>${{ item.bid.current_price }}</strong> <small class="text-muted">Exclude Tax</small> </h1>
                              {% else %}
                                 <a {% if not user.is_authenticated %}disabled {% endif %} href="/item/id/{{ item.pk }}/addcart" class="btn btn-primary pull-right">Add to cart</a>
-                                <h1 class="product-main-price">${{ item.listed_price }} <small class="text-muted">Exclude Tax</small> </h1>
+
+                                <h1 class="product-main-price"><strong>${{ item.listed_price }}</strong> ({{ item.amount }} Left) <small class="text-muted">Exclude Tax</small>  </h1>
                             {% endif %}
                             </div>
                             <hr>
@@ -112,11 +106,9 @@
                             <div class="text-right">
                                 <div class="btn-group">
                                     <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
-                                    <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button>
+                                    <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope"></i> Leave a comment</button>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -153,7 +145,42 @@
     </div>
 {% endblock %}
 
+{% block modal %}
 
+    <div class="modal inmodal in" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Comment</h4>
+                </div>
+                 <form method="post" action="/item/id/{{ item.pk }}/rate/">
+                                                     {% csrf_token %}
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Rate</label>
+                            <div class="row"> <div class="col-md-4"><input id="num" name="num" type="text" required placeholder="0 - 5" class="form-control"></div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <label class="col-sm-2 control-label">Comment</label>
+
+                            <div class="col-sm-10"><textarea required name="content" id="content" type="text" class="form-control"></textarea></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block js %}
 <!-- slick carousel-->

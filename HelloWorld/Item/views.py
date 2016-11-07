@@ -5,7 +5,7 @@ from django.db.models import Avg, Sum, Q
 from django.views.decorators.http import require_http_methods
 
 from forms import BidForm
-from models import Item, BidItem, Rate, Category
+from models import Item, BidItem, Rate, Category, Order
 # Create your views here.
 
 
@@ -121,3 +121,58 @@ def add_new_item_view(request):
 			messages.add_message(request, messages.INFO, "toastr.error('You provided wrong data.', 'Error');")
 
 	return render(request, 'ecommerce/newitem.html')
+
+
+@require_http_methods(['POST'])
+def rate_view(request, pk):
+	try:
+		item = Item.objects.get(pk=pk)
+	except (KeyError, Item.DoesNotExist):
+		messages.add_message(request, messages.INFO, "toastr.error('The item you are looking for does not exist', 'Error');")
+		return HttpResponseRedirect('/index/')
+
+	if item.provider == request.user:
+		messages.add_message(request, messages.INFO, "toastr.error('You cannot buy your own item!', 'Error');")
+		return HttpResponseRedirect('/item/id/'+pk)
+
+	rate = Rate()
+	rate.item = item
+	rate.num = request.POST['num']
+	rate.rater = request.user
+	rate.content = request.POST['content']
+
+	rate.save()
+
+	messages.add_message(request, messages.INFO, "toastr.success('You have left a comment.', 'Success');")
+	return HttpResponseRedirect('/item/id/'+pk)
+
+
+def checkout_view(request):
+	cart_items = request.user.cart.get().items.filter(bid=None)
+	total = request.user.cart.get().items.filter(bid=None).aggregate(Sum('listed_price'))['listed_price__sum']
+
+	if request.method == 'POST':
+		if cart_items.count == 0:
+			messages.add_message(request, messages.INFO, "toastr.success('Your cart is empty.', 'Error');")
+			return HttpResponseRedirect('/index/')
+
+		else:
+			for item in cart_items:
+				item.amount -= 1
+				request.user.cart.get().items.remove(item)
+				request.user.cart.get().save()
+				order = Order()
+				order.item = item
+				order.amount = 1
+				order.buyer = request.user
+				order.status = 1
+				order.save()
+			messages.add_message(request, messages.INFO, "toastr.success('Purchase completed.', 'Success');")
+			return HttpResponseRedirect('/history/')
+
+	return render(request, 'ecommerce/payment.html', {'cart_items': cart_items, 'total': total})
+
+
+def order_history_view(request):
+	history = Order.objects.filter(buyer=request.user)
+	return render(request, 'ecommerce/order-history.html', {'history': history})

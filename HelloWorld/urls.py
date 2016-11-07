@@ -35,6 +35,9 @@ urlpatterns = [
 	url(r'^item/categ/(?P<categ>[0-9]*)/$', auth_view.login_view, name='item_categ'),
 	url(r'^item/id/(?P<pk>[0-9]*)/$', item_view.detail_view, name='item_id'),
 	url(r'^item/new/n/$', item_view.add_new_item_view, name='item_new'),
+	url(r'^item/id/(?P<pk>[0-9]*)/rate/$', item_view.rate_view, name='item_rate'),
+	url(r'^checkout/$', item_view.checkout_view, name='checkout'),
+
 
 
 	# Cart

@@ -56,16 +56,18 @@ class Rate(models.Model):
 	content = models.CharField(max_length=200)
 	rater = models.ForeignKey(Account)
 	num = models.IntegerField()
-	created = models.DateTimeField(auto_created=True)
+	created = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
 		return str(self.num)
 
 
 class Order(models.Model):
-	created = models.DateTimeField(auto_created=True)
+	created = models.DateTimeField(auto_now=True)
 	amount = models.IntegerField(default=0)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	buyer = models.ForeignKey(Account, related_name='purchased')
+	# 1: not shipped, 2: shipped, 3: delivered
+	status = models.IntegerField(default=1)
 
 
