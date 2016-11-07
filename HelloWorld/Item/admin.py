@@ -5,11 +5,11 @@ from models import Item, BidItem, Rate, Category, Order
 
 
 class ItemAdmin(admin.ModelAdmin):
-	list_display = ['name', 'keywords', 'bid', 'listed_price']
+	list_display = ['name', 'keywords', 'provider', 'listed_price', '_type']
 
 
 class BidItemAdmin(admin.ModelAdmin):
-	list_display = ['start_time', 'end_time', 'reserved_price', 'action_price']
+	list_display = ['end_time', 'reserved_price', 'action_price']
 
 
 class RateAdmin(admin.ModelAdmin):

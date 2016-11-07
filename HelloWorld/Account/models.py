@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
+import HelloWorld.Item
 
 class AccountManager(BaseUserManager):
 	def create_user(self, email, password=None, **kwargs):
@@ -19,6 +20,11 @@ class AccountManager(BaseUserManager):
 
 		account.set_password(password)
 		account.save()
+
+		# create user shopping cart
+		cart = HelloWorld.Item
+		cart.user = account
+		cart.save()
 
 		return account
 
@@ -49,6 +55,8 @@ class Account(AbstractBaseUser, PermissionsMixin):
 	address = models.ForeignKey(Address, null=True, blank=True)
 	# permission
 	is_admin = models.BooleanField(default=False)
+	is_seller = models.BooleanField(default=False)
+	is_staff = models.BooleanField(default=True)
 	# Manager
 	objects = AccountManager()
 	# Timestamp
@@ -69,20 +77,32 @@ class Account(AbstractBaseUser, PermissionsMixin):
 		"Returns the person's full name."
 		return self.username
 
+	@property
 	def get_short_name(self):
 		return self.username
 
-	def add_friends(self, value):
-		pass
-
-	def post_moments(self, value):
-		pass
+	@property
+	def first_name(self):
+		"Returns the person's first name."
+		return self.username
 
 	@property
-	def is_staff(self):
-		return True
+	def last_name(self):
+		"Returns the person's last name."
+		return self.username
+
+	@property
+	def date_joined(self):
+		return self.created
+
+	@property
+	def is_active(self):
+		return self.is_staff
 
 
-class Seller(models.Model):
-	is_enterprise = models.BooleanField(default=False)
-	account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='is_seller', primary_key=True)
+class CreditCard(models.Model):
+	number = models.IntegerField()
+	expire_date = models.DateField()
+	cvv = models.IntegerField()
+	address = models.ForeignKey(Address)
+	owner = models.ForeignKey(Account, on_delete=models.CASCADE)

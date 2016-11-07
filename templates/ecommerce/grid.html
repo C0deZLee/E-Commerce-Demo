@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Products List</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/index/">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Products List</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            {% for item in item_list %}
+            <div class="col-md-3">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+
+                        <div class="product-imitation">
+                            [ NO IMAGE ]
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-price">
+                                {% if item.bid %}
+                                   Bid ${{ item.bid.current_price }}
+                                {% else %}
+                                    ${{ item.listed_price }}
+                                {% endif %}
+                            </span>
+                            <small class="text-muted">{{ item.category.name }}</small>
+                            <a href="/item/id/{{ item.pk }}/" class="product-name"> {{ item.name }}</a>
+                            <div class="small m-t-xs">
+                                {{ item.description_short|truncatewords:10 }}
+                            </div>
+                            <div class="m-t text-righ">
+
+                                <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-primary">More <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if forloop.counter|divisibleby:4 %}
+            </div>
+            <div class="row">
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+

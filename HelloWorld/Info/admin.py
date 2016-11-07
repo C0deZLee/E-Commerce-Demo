@@ -1,10 +1,8 @@
 from django.contrib import admin
 
-from models import CreditCard
-# Register your models here.
+from models import Cart
 
+class CartAdmin(admin.ModelAdmin):
+	list_display = ('pk', 'user')
 
-class CreditCardAdmin(admin.ModelAdmin):
-	list_display = ['number', 'expire_date', 'cvv', 'address', 'owner']
-
-admin.site.register(CreditCard, CreditCardAdmin)
+admin.site.register(Cart, CartAdmin)

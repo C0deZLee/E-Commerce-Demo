@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load get_range %}
+{% block css %}
+    <link href="{% get_static_prefix %}css/plugins/slick/slick.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}css/plugins/slick/slick-theme.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+        <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Products detail</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/index/">Home</a>
+                </li>
+                <li >
+                    <a href="/index/">Products list</a>
+                </li>
+                <li class="active">
+                    <strong>Products detail</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-5">
+
+
+                            <div class="product-images">
+
+                                <div>
+                                    <div class="image-imitation">
+                                        [IMAGE 1]
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="image-imitation">
+                                        [IMAGE 2]
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="image-imitation">
+                                        [IMAGE 3]
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-7">
+
+                            <h2 class="font-bold m-b-xs">
+                                {{ item.name }}
+                            </h2>
+                            <small>{{ item.description_short }}</small>
+                            <hr>
+                            <div>
+                                <a {% if not user.is_authenticated %}disabled {% endif %} href="/item/id/{{ item.pk }}/addcart" class="btn btn-primary pull-right">Add to cart</a>
+                                <h1 class="product-main-price">${{ item.listed_price }} <small class="text-muted">Exclude Tax</small> </h1>
+                            </div>
+                            <hr>
+                            <h4>Product description</h4>
+
+                            <div class="small text-muted">
+                               {{ item.description }}
+                            </div>
+
+                            <h4>Rates</h4>
+                                <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                (no enough info to provide rating)
+                            <dl class="dl-horizontal m-t-md small">
+                                <dt>Description lists</dt>
+                                <dd>A description list is perfect for defining terms.</dd>
+                                <dt>Euismod</dt>
+                                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                                <dt>Malesuada porta</dt>
+                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                <dt>Felis euismod semper eget</dt>
+                                <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+                            </dl>
+                            <div class="text-right">
+                                <div class="btn-group">
+                                    <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
+                                    <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="ibox-content">
+            <div>
+                <div class="feed-activity-list">
+                    {% for rate in rates %}
+                    <div class="feed-element">
+                        <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="img/a1.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <small class="pull-right text-navy">{{ rate.created }}</small>
+                            <strong>{{ rate.rater.username }}</strong><br>
+                            {% for i in rate.num|get_range %}<i class="fa fa-star"></i>{% endfor %}<br>
+                           {{ rate.content }}
+                            <div class="actions">
+                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                <a class="btn btn-xs btn-white"><i class="fa fa-flag"></i> Flag</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+<!-- slick carousel-->
+<script src="{% get_static_prefix %}js/plugins/slick/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.product-images').slick({
+            dots: true
+        });
+    });
+</script>
+{% endblock %}

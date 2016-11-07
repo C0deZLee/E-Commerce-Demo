@@ -6,14 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | E-commerce</title>
+    <title>Hello World | Profile</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
 
 </head>
 
@@ -96,12 +94,12 @@
                         <li><a href="form_markdown.html">Markdown</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">App Views</span>  <span class="pull-right label label-primary">SPECIAL</span></a>
-                    <ul class="nav nav-second-level collapse">
+                    <ul class="nav nav-second-level">
                         <li><a href="contacts.html">Contacts</a></li>
                         <li><a href="profile.html">Profile</a></li>
-                        <li><a href="profile_2.html">Profile v.2</a></li>
+                        <li class="active"><a href="profile_2.html">Profile v.2</a></li>
                         <li><a href="contacts_2.html">Contacts v.2</a></li>
                         <li><a href="projects.html">Projects</a></li>
                         <li><a href="project_detail.html">Project detail</a></li>
@@ -193,14 +191,14 @@
                         <li><a href="jq_grid.html">jqGrid</a></li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="grid.html">Products grid</a></li>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="ecommerce_products_grid.html">Products grid</a></li>
                         <li><a href="ecommerce_product_list.html">Products list</a></li>
                         <li><a href="ecommerce_product.html">Product edit</a></li>
-                        <li><a href="detail.html">Product detail</a></li>
-                        <li class="active"><a href="ecommerce-cart.html">Cart</a></li>
+                        <li><a href="ecommerce_product_detail.html">Product detail</a></li>
+                        <li><a href="ecommerce-cart.html">Cart</a></li>
                         <li><a href="ecommerce-orders.html">Orders</a></li>
                         <li><a href="ecommerce_payments.html">Credit Card form</a></li>
                     </ul>
@@ -376,16 +374,16 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>E-commerce shoping cart</h2>
+                    <h2>Profile</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="index.html">Home</a>
                         </li>
                         <li>
-                            <a>E-commerce</a>
+                            <a>Extra Pages</a>
                         </li>
                         <li class="active">
-                            <strong>Shoping cart</strong>
+                            <strong>Profile</strong>
                         </li>
                     </ol>
                 </div>
@@ -393,360 +391,413 @@
 
                 </div>
             </div>
-
         <div class="wrapper wrapper-content animated fadeInRight">
 
 
+            <div class="row m-b-lg m-t-lg">
+                <div class="col-md-6">
 
-            <div class="row">
-                <div class="col-md-9">
-
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <span class="pull-right">(<strong>5</strong>) items</span>
-                            <h5>Items in your cart</h5>
-                        </div>
-                        <div class="ibox-content">
-
-
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                            <a href="#" class="text-navy">
-                                                Desktop publishing software
-                                            </a>
-                                            </h3>
-                                            <p class="small">
-                                                It is a long established fact that a reader will be distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $180,00
-                                            <s class="small text-muted">$230,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $180,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                    <div class="profile-image">
+                        <img src="img/a4.jpg" class="img-circle circle-border m-b-md" alt="profile">
+                    </div>
+                    <div class="profile-info">
+                        <div class="">
+                            <div>
+                                <h2 class="no-margins">
+                                    Alex Smith
+                                </h2>
+                                <h4>Founder of Groupeq</h4>
+                                <small>
+                                    There are many variations of passages of Lorem Ipsum available, but the majority
+                                    have suffered alteration in some form Ipsum available.
+                                </small>
                             </div>
-
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Text editor
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                There are many variations of passages of Lorem Ipsum available
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>List is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $50,00
-                                            <s class="small text-muted">$63,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="2">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $100,00
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    CRM software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $110,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $110,00
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    PM software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Readable content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $130,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $130,00
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Photo editor
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                Page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $700,00
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $70,00
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="ibox-content">
-
-                            <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
-                            <button class="btn btn-white"><i class="fa fa-arrow-left"></i> Continue shopping</button>
-
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-3">
+                    <table class="table small m-b-xs">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>142</strong> Projects
+                            </td>
+                            <td>
+                                <strong>22</strong> Followers
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>61</strong> Comments
+                            </td>
+                            <td>
+                                <strong>54</strong> Articles
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>154</strong> Tags
+                            </td>
+                            <td>
+                                <strong>32</strong> Friends
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <small>Sales in last 24h</small>
+                    <h2 class="no-margins">206 480</h2>
+                    <div id="sparkline1"></div>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-3">
 
                     <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Cart Summary</h5>
-                        </div>
                         <div class="ibox-content">
-                            <span>
-                                Total
-                            </span>
-                            <h2 class="font-bold">
-                                $390,00
-                            </h2>
+                                <h3>About Alex Smith</h3>
 
-                            <hr/>
-                            <span class="text-muted small">
-                                *For United States, France and Germany applicable sales tax will be applied
-                            </span>
-                            <div class="m-t-sm">
-                                <div class="btn-group">
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
-                                <a href="#" class="btn btn-white btn-sm"> Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Support</h5>
-                        </div>
-                        <div class="ibox-content text-center">
-
-
-
-                            <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
-                            <span class="small">
-                                Please contact with us if you have any questions. We are avalible 24h.
-                            </span>
-
-
-                        </div>
-                    </div>
-
-                    <div class="ibox">
-                        <div class="ibox-content">
-
-                            <p class="font-bold">
-                            Other products you may be interested
+                            <p class="small">
+                                There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered alteration in some form, by injected humour, or randomised words which don't.
+                                <br/>
+                                <br/>
+                                If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                                anything embarrassing
                             </p>
 
-                            <hr/>
-                            <div>
-                                <a href="#" class="product-name"> Product 1</a>
-                                <div class="small m-t-xs">
-                                    Many desktop publishing packages and web page editors now.
-                                </div>
-                                <div class="m-t text-righ">
+                            <p class="small font-bold">
+                                <span><i class="fa fa-circle text-navy"></i> Online status</span>
+                                </p>
 
-                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div>
-                                <a href="#" class="product-name"> Product 2</a>
-                                <div class="small m-t-xs">
-                                    Many desktop publishing packages and web page editors now.
-                                </div>
-                                <div class="m-t text-righ">
+                        </div>
+                    </div>
 
-                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
-                                </div>
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <h3>Followers and friends</h3>
+                            <p class="small">
+                                If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                                anything embarrassing
+                            </p>
+                            <div class="user-friends">
+                                <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a6.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a7.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a8.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <h3>Personal friends</h3>
+                            <ul class="list-unstyled file-list">
+                                <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
+                                <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
+                                <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
+                                <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
+                                <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
+                                <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <h3>Private message</h3>
+
+                            <p class="small">
+                                Send private message to Alex Smith
+                            </p>
+
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="email" class="form-control" placeholder="Message subject">
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-block">Send</button>
 
                         </div>
                     </div>
 
                 </div>
+
+                <div class="col-lg-5">
+
+                    <div class="social-feed-box">
+
+                        <div class="pull-right social-action dropdown">
+                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu m-t-xs">
+                                <li><a href="#">Config</a></li>
+                            </ul>
+                        </div>
+                        <div class="social-avatar">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="img/a1.jpg">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            </div>
+                        </div>
+                        <div class="social-body">
+                            <p>
+                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                                in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                                default model text.
+                            </p>
+
+                            <div class="btn-group">
+                                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                            </div>
+                        </div>
+                        <div class="social-footer">
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a1.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                                    <br/>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                    <small class="text-muted">12.06.2014</small>
+                                </div>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a2.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Making this the first true generator on the Internet. It uses a dictionary of.
+                                    <br/>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                    <small class="text-muted">10.07.2014</small>
+                                </div>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a3.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="social-feed-box">
+
+                        <div class="pull-right social-action dropdown">
+                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu m-t-xs">
+                                <li><a href="#">Config</a></li>
+                            </ul>
+                        </div>
+                        <div class="social-avatar">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="img/a6.jpg">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            </div>
+                        </div>
+                        <div class="social-body">
+                            <p>
+                                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                                in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                                default model text.
+                            </p>
+                            <p>
+                                Lorem Ipsum as their
+                                default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                                in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                                default model text.
+                            </p>
+                            <img src="img/gallery/3.jpg" class="img-responsive">
+                            <div class="btn-group">
+                                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                            </div>
+                        </div>
+                        <div class="social-footer">
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a1.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                                    <br/>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                    <small class="text-muted">12.06.2014</small>
+                                </div>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a2.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Making this the first true generator on the Internet. It uses a dictionary of.
+                                    <br/>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                    <small class="text-muted">10.07.2014</small>
+                                </div>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a8.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Making this the first true generator on the Internet. It uses a dictionary of.
+                                    <br/>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                    <small class="text-muted">10.07.2014</small>
+                                </div>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="img/a3.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-lg-4 m-b-lg">
+                    <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Meeting</h2>
+                                <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the sale.
+                                </p>
+                                <a href="#" class="btn btn-sm btn-primary"> More info</a>
+                                    <span class="vertical-date">
+                                        Today <br>
+                                        <small>Dec 24</small>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon blue-bg">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Send documents to Mike</h2>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+                                <a href="#" class="btn btn-sm btn-success"> Download document </a>
+                                    <span class="vertical-date">
+                                        Today <br>
+                                        <small>Dec 24</small>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon lazur-bg">
+                                <i class="fa fa-coffee"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Coffee Break</h2>
+                                <p>Go to shop and find some products. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                <a href="#" class="btn btn-sm btn-info">Read more</a>
+                                <span class="vertical-date"> Yesterday <br><small>Dec 23</small></span>
+                            </div>
+                        </div>
+
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon yellow-bg">
+                                <i class="fa fa-phone"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Phone with Jeronimo</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
+                                <span class="vertical-date">Yesterday <br><small>Dec 23</small></span>
+                            </div>
+                        </div>
+
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-comments"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Chat with Monica and Sandra</h2>
+                                <p>Web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </p>
+                                <span class="vertical-date">Yesterday <br><small>Dec 23</small></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-
-
-
 
         </div>
         <div class="footer">
@@ -765,13 +816,32 @@
 
     <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+
+            $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 48], {
+                type: 'line',
+                width: '100%',
+                height: '50',
+                lineColor: '#1ab394',
+                fillColor: "transparent"
+            });
+
+
+        });
+    </script>
 
 </body>
 

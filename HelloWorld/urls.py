@@ -17,13 +17,23 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from .Account import views as auth_view
+from .Item import views as item_view
 
 urlpatterns = [
-    # url(r'^$', views.PandingView, name='landing'),
-	# Auth
-	url(r'^login/', auth_view.login_view, name='login'),
-	url(r'^logout/', auth_view.logout_view, name='logout'),
-	url(r'^register/', auth_view.reg_view, name='reg'),
+	url(r'^$', item_view.list_view, name='landing'),
+	url(r'^index/$', item_view.list_view, name='index'),
 
-    url(r'^admin/', admin.site.urls),
+	# Auth
+	url(r'^login/$', auth_view.login_view, name='login'),
+	url(r'^logout/$', auth_view.logout_view, name='logout'),
+	url(r'^register/$', auth_view.reg_view, name='reg'),
+	url(r'^seller_request/$', auth_view.become_seller_view, name='seller_request'),
+
+
+	# Items
+	url(r'^item/$', item_view.list_view, name='item'),
+	url(r'^item/categ/(?P<categ>[0-9]*)/$', auth_view.login_view, name='item_categ'),
+	url(r'^item/id/(?P<pk>[0-9]*)/$', item_view.detail_view, name='item_id'),
+	url(r'^item/id/(?P<pk>[0-9]*)/addcart$', item_view.add_cart_view, name='item_cart'),
+	url(r'^admin/', admin.site.urls),
 ]

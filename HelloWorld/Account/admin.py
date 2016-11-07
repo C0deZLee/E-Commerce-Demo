@@ -3,7 +3,12 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 
 from forms import UserChangeForm, UserCreationForm
-from models import Account, Address, Seller
+from models import Account, Address, CreditCard
+# Register your models here.
+
+
+class CreditCardAdmin(admin.ModelAdmin):
+	list_display = ['number', 'expire_date', 'cvv', 'address', 'owner']
 
 
 class AccountAdmin(UserAdmin):
@@ -25,6 +30,12 @@ class AccountAdmin(UserAdmin):
             'fields': ('email', 'username', 'password1', 'password2')}
          ),
     )
+    fieldsets = (
+        (None, {
+        'classes': ('wide',),
+        'fields': ('email', 'username',),
+        }),
+    )
     search_fields = ('email', 'username')
     ordering = ('email',)
     filter_horizontal = ()
@@ -34,10 +45,8 @@ class AddressAdmin(admin.ModelAdmin):
     list_display = ['address1', 'address2', 'zip_code', 'state']
 
 
-class SellerAdmin(admin.ModelAdmin):
-    list_display = ['is_enterprise', 'account']
-
 admin.site.register(Address, AddressAdmin)
+admin.site.register(CreditCard, CreditCardAdmin)
 admin.site.register(Account, AccountAdmin)
 # ... and, since we're not using Django's built-in permissions, unregister the Group model from admin.
 admin.site.unregister(Group)

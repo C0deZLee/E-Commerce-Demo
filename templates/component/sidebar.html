@@ -1,0 +1,55 @@
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                    </div>
+                    <div class="logo-element">
+                        HW
+                    </div>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Shopping</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="form_basic.html">Recommends</a></li>
+                        <li><a href="form_basic.html">Category 1</a></li>
+                        <li><a href="form_advanced.html">Category 2</a></li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Buyer</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="form_basic.html">My cart</a></li>
+                        <li><a href="form_advanced.html">Purchase history</a></li>
+                        <li><a href="form_wizard.html">Ask refund</a></li>
+                    </ul>
+                </li>
+                {% if user.is_seller %}
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Seller</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="form_basic.html">Post new</a></li>
+                        <li><a href="form_advanced.html">Change deliver info</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Profile</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="form_basic.html">Change profile</a></li>
+                        <li><a href="/seller_request/">Request become seller</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+
