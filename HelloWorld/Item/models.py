@@ -67,6 +67,7 @@ class Order(models.Model):
 	amount = models.IntegerField(default=0)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	buyer = models.ForeignKey(Account, related_name='purchased')
+	seller = models.ForeignKey(Account, related_name='selled')
 	# 1: not shipped, 2: shipped, 3: delivered
 	status = models.IntegerField(default=1)
 

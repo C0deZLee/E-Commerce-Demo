@@ -2,6 +2,8 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
+                    {% if user.is_authenticated %}
+
                     <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.username }}</strong>
@@ -17,6 +19,7 @@
                                 <li><a href="#">Logout</a></li>
                             </ul>
                     </div>
+                    {% endif %}
                     <div class="logo-element">
                         HW
                     </div>
@@ -45,7 +48,7 @@
                             </li>
                         </ul>
                     </li>
-                        <li><a href="form_advanced.html">Your Shipping</a></li>
+                        <li><a href="/sells/">Your Sells</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -53,7 +56,7 @@
                     <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Profile</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="/cart/">My cart</a></li>
-                        <li><a href="form_advanced.html">Purchase history</a></li>
+                        <li><a href="/orders/">Purchase history</a></li>
                         <li><a href="form_basic.html">Change profile</a></li>
                         <li><a href="/seller_request/">Request become seller</a></li>
                     </ul>

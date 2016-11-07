@@ -35,7 +35,7 @@ def logout_view(request):
 	Log the user out
 	'''
 	auth_logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/login/')
 
 
 def reg_view(request):

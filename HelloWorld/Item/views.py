@@ -176,3 +176,30 @@ def checkout_view(request):
 def order_history_view(request):
 	history = Order.objects.filter(buyer=request.user)
 	return render(request, 'ecommerce/order-history.html', {'history': history})
+
+
+def sell_history_view(request):
+	if not request.user.is_seller:
+		messages.add_message(request, messages.INFO, "toastr.error('You are not seller', 'Error');")
+		return HttpResponseRedirect('/index/')
+	history = Order.objects.filter(seller=request.user)
+	return render(request, 'ecommerce/sell-history.html', {'history': history})
+
+
+def change_order_status_view(request, pk):
+	try:
+		order = Order.objects.get(pk=pk)
+	except (KeyError, Order.DoesNotExist):
+		messages.add_message(request, messages.INFO, "toastr.error('The record you are looking for does not exist', 'Error');")
+		return HttpResponseRedirect('/index/')
+
+	if order.seller == request.user:
+		if order.status != 3:
+			order.status += 1
+			order.save()
+	else:
+		messages.add_message(request, messages.INFO, "toastr.error('The record you are looking for does not exist', 'Error');")
+
+
+	return HttpResponseRedirect('/sells/')
+

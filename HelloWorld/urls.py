@@ -37,6 +37,10 @@ urlpatterns = [
 	url(r'^item/new/n/$', item_view.add_new_item_view, name='item_new'),
 	url(r'^item/id/(?P<pk>[0-9]*)/rate/$', item_view.rate_view, name='item_rate'),
 	url(r'^checkout/$', item_view.checkout_view, name='checkout'),
+	url(r'^orders/$', item_view.order_history_view, name='orders'),
+	url(r'^sells/$', item_view.sell_history_view, name='sells'),
+	url(r'^sells/(?P<pk>[0-9]*)/change/$', item_view.change_order_status_view, name='sells'),
+
 
 
 

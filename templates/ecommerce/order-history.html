@@ -38,9 +38,10 @@
                                 <tr>
 
                                     <th>Order ID</th>
-                                    <th data-hide="phone">Customer</th>
-                                    <th data-hide="phone">Amount</th>
+                                    <th data-hide="phone">Name</th>
+                                    <th data-hide="phone">Price</th>
                                     <th data-hide="phone">Date added</th>
+                                    <th data-hide="phone">Seller</th>
                                     <th data-hide="phone">Status</th>
                                     <th class="text-right">Action</th>
 
@@ -50,26 +51,32 @@
                                 {% for order in history %}
                                 <tr>
                                     <td>
-                                       3214
+                                       {{ order.pk }}
                                     </td>
                                     <td>
-                                        Customer example
+                                      <a href="/item/id/{{ order.item.pk }}/">  {{ order.item.name }}</a>
                                     </td>
                                     <td>
-                                        $500.00
+                                        ${{ order.item.listed_price }}
                                     </td>
                                     <td>
-                                        03/04/2015
+                                        {{ order.created }}
                                     </td>
-
                                     <td>
-                                        <span class="label label-primary">Pending</span>
+                                        {{ order.item.provider }}
+                                    </td>
+                                    <td>
+                                        {% if order.status == 1 %}
+                                        <span class="label label-primary">Not shipped yet</span>
+                                        {% elif order.status == 2 %}
+                                        <span class="label label-primary">Shipped</span>
+                                        {% else %}
+                                        <span class="label label-primary">Delivered</span>
+                                        {% endif %}
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-group">
-                                            <button class="btn-white btn btn-xs">View</button>
-                                            <button class="btn-white btn btn-xs">Edit</button>
-                                            <button class="btn-white btn btn-xs">Delete</button>
+                                            <button class="btn-white btn btn-xs">Contact Seller</button>
                                         </div>
                                     </td>
                                 </tr>
