@@ -6,11 +6,20 @@ from django.views.decorators.http import require_http_methods
 
 from forms import BidForm
 from models import Item, BidItem, Rate, Category, Order
+from ..Info.models import Cart
 # Create your views here.
 
 
 def list_view(request):
-	item_list = Item.objects.all()[:5]
+	item_list = Item.objects.all()[:9]
+	if request.user.is_authenticated:
+		if Cart.objects.filter(user=request.user).count() == 0:
+			cart = Cart()
+			cart.user = request.user
+			cart.save()
+		else:
+			print Cart.objects.filter(user=request.user).count()
+
 	return render(request, 'ecommerce/grid.html', {'item_list': item_list})
 
 
@@ -164,6 +173,7 @@ def checkout_view(request):
 				order = Order()
 				order.item = item
 				order.amount = 1
+				order.seller = order.item.provider
 				order.buyer = request.user
 				order.status = 1
 				order.save()

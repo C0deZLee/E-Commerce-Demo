@@ -67,16 +67,16 @@
                                     </td>
                                     <td>
                                         {% if order.status == 1 %}
-                                        <span class="label label-primary">Not shipped yet</span>
+                                        <span class="label label-success">Not shipped yet</span>
                                         {% elif order.status == 2 %}
-                                        <span class="label label-primary">Shipped</span>
+                                        <span class="label label-warning">Shipped</span>
                                         {% else %}
                                         <span class="label label-primary">Delivered</span>
                                         {% endif %}
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-group">
-                                            <button href="sells/{{ order.pk }}/change/" class="btn-white btn btn-xs">Change Status</button>
+                                            <a href="/sells/{{ order.pk }}/change/" class="btn-white btn btn-xs">Change Status</a>
                                         </div>
                                     </td>
                                 </tr>

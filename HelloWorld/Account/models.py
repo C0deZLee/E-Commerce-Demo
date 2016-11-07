@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
-import HelloWorld.Item
 
 class AccountManager(BaseUserManager):
 	def create_user(self, email, password=None, **kwargs):
@@ -20,11 +19,6 @@ class AccountManager(BaseUserManager):
 
 		account.set_password(password)
 		account.save()
-
-		# create user shopping cart
-		cart = HelloWorld.Item
-		cart.user = account
-		cart.save()
 
 		return account
 

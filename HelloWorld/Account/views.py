@@ -46,7 +46,7 @@ def reg_view(request):
 			return HttpResponseRedirect('/index/')
 	else:
 		form = UserCreationForm()
-
+			# create user shopping cart
 	return render(request, 'auth/register.html', {'form': form})
 
 

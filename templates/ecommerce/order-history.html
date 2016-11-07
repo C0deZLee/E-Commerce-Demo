@@ -67,9 +67,9 @@
                                     </td>
                                     <td>
                                         {% if order.status == 1 %}
-                                        <span class="label label-primary">Not shipped yet</span>
+                                        <span class="label label-success">Not shipped yet</span>
                                         {% elif order.status == 2 %}
-                                        <span class="label label-primary">Shipped</span>
+                                        <span class="label label-warning">Shipped</span>
                                         {% else %}
                                         <span class="label label-primary">Delivered</span>
                                         {% endif %}
