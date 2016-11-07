@@ -42,7 +42,7 @@
                                         </td>
                                         <td class="desc">
                                             <h3>
-                                                <a href="#" class="text-navy">
+                                                <a href="/item/id/{{ item.pk }}" class="text-navy">
                                                     {{ item.name }}
                                                 </a>
                                             </h3>
@@ -115,10 +115,10 @@
                   <div class="col-md-9">
                          <div class="ibox">
                         <div class="ibox-title">
-                            <span class="pull-right">(<strong>{{ cart_items.count }}</strong>) items</span>
+                            <span class="pull-right">(<strong>{{ bid_items.count }}</strong>) items</span>
                             <h5>Items biding</h5>
                         </div>
-                        {% for item in cart_items %}
+                        {% for item in bid_items %}
                         <div class="ibox-content">
                             <div class="table-responsive">
                                 <table class="table shoping-cart-table">
@@ -139,8 +139,8 @@
                                                 {{ item.description_short }}
                                             </p>
                                             <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>List is perfect for defining terms.</dd>
+                                                <dt>Bid end time</dt>
+                                                <dd>{{ item.bid.end_time }}</dd>
                                             </dl>
 
                                             <div class="m-t-sm">
@@ -149,14 +149,14 @@
                                         </td>
 
                                         <td>
-                                            ${{ item.listed_price }}
+                                            ${{ item.bid.current_price }}
                                         </td>
                                         <td width="65">
                                             <input type="text" class="form-control" placeholder="1">
                                         </td>
                                         <td>
                                             <h4>
-                                                ${{ item.listed_price }}
+                                                ${{ item.bid.current_price }}
                                             </h4>
                                         </td>
 
