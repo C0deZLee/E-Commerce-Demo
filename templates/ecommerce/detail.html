@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% load get_range %}
+{% load widget_tweaks %}
+
 {% block css %}
-    <link href="{% get_static_prefix %}css/plugins/slick/slick.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}css/plugins/slick/slick.css" rel="stylesheet"
+          xmlns="http://www.w3.org/1999/html">
     <link href="{% get_static_prefix %}css/plugins/slick/slick-theme.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -57,7 +62,6 @@
                                     </div>
                                 </div>
 
-
                             </div>
 
                         </div>
@@ -69,8 +73,20 @@
                             <small>{{ item.description_short }}</small>
                             <hr>
                             <div>
+
+                            {% if item.bid %}
+                                <form action="/item/id/{{ item.pk }}/addbid" method="post">
+                                {% csrf_token %}
+                                <button {% if not user.is_authenticated %}disabled {% endif %} type="submit" class="btn btn-primary pull-right">Bid</button>
+                                <div class="col-md-2 pull-right ">
+                                  <input class="form-control" id="newbid" type="text" name="newbid" maxlength="100" required />
+                                </div>
+                                </form>
+                                <h1 class="product-main-price">Current ${{ item.bid.current_price }} <small class="text-muted">Exclude Tax</small> </h1>
+                             {% else %}
                                 <a {% if not user.is_authenticated %}disabled {% endif %} href="/item/id/{{ item.pk }}/addcart" class="btn btn-primary pull-right">Add to cart</a>
                                 <h1 class="product-main-price">${{ item.listed_price }} <small class="text-muted">Exclude Tax</small> </h1>
+                            {% endif %}
                             </div>
                             <hr>
                             <h4>Product description</h4>
@@ -142,7 +158,8 @@
 {% block js %}
 <!-- slick carousel-->
 <script src="{% get_static_prefix %}js/plugins/slick/slick.min.js"></script>
-
+<!-- TouchSpin -->
+<script src="{% get_static_prefix %}js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.product-images').slick({

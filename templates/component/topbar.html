@@ -9,6 +9,13 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
+                {% if user.is_authenticated %}
+                    <li>
+                    <a class="count-info"  href="/cart/">
+                        <i class="fa fa-shopping-cart"></i>  <span class="label label-warning">{{ user.cart.items.count }}</span>
+                    </a>
+                    </li>
+                {% endif %}
                     <li>
                         {% if user.is_authenticated %}
                         <a href="/logout/">

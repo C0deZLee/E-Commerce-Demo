@@ -31,12 +31,12 @@
                         <div class="product-desc">
                             <span class="product-price">
                                 {% if item.bid %}
-                                   Bid ${{ item.bid.current_price }}
+                                   From ${{ item.bid.current_price }}
                                 {% else %}
                                     ${{ item.listed_price }}
                                 {% endif %}
                             </span>
-                            <small class="text-muted">{{ item.category.name }}</small>
+                            <small class="text-muted">{{ item.category.name }} </small>
                             <a href="/item/id/{{ item.pk }}/" class="product-name"> {{ item.name }}</a>
                             <div class="small m-t-xs">
                                 {{ item.description_short|truncatewords:10 }}
@@ -44,6 +44,7 @@
                             <div class="m-t text-righ">
 
                                 <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-primary">More <i class="fa fa-long-arrow-right"></i> </a>
+                               {% if item.bid %} <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-white">End: {{ item.bid.end_time }}</a> {% endif %}
                             </div>
                         </div>
                     </div>
