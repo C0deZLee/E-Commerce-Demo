@@ -7,18 +7,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HelloWorld | Revolution of e-commerce</title>
+    <title>Welcome | DS 22 Final Project</title>
 
     <link href="{% get_static_prefix %}css/bootstrap.min.css" rel="stylesheet">
     <link href="{% get_static_prefix %}font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="{% get_static_prefix %}css/animate.css" rel="stylesheet">
     <link href="{% get_static_prefix %}css/style.css" rel="stylesheet">
     <link href="{% get_static_prefix %}css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="{% get_static_prefix %}css/plugins/iCheck/custom.css" rel="stylesheet">
     {% block css %}{% endblock %}
 
 </head>
 
-<body>
+<body class="pace-done mini-navbar">
     {% include "component/sidebar.html" %}
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
@@ -37,25 +38,32 @@
 
     <script src="{% get_static_prefix %}js/inspinia.js"></script>
     <script src="{% get_static_prefix %}js/plugins/pace/pace.min.js"></script>
+    <script src="{% get_static_prefix %}js/plugins/iCheck/icheck.min.js"></script>
     <script src="{% get_static_prefix %}js/plugins/toastr/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
-                setTimeout(function () {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                {% if messages %}
-                    {% for message in messages %}
-                        {{ message|safe }}
-                    {% endfor %}
-                {% endif %}
+          $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            setTimeout(function () {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message|safe }}
+                {% endfor %}
+            {% endif %}
 
-            }, 1300);
+        }, 1300);
+
         })
     </script>
+        <!-- iCheck -->
     {% block js %}{% endblock %}
 </body>
 

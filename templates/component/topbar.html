@@ -4,7 +4,7 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+{#                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">#}
                         </div>
                     </form>
                 </div>
@@ -12,7 +12,7 @@
                 {% if user.is_authenticated %}
                     <li>
                     <a class="count-info"  href="/cart/">
-                        <i class="fa fa-shopping-cart"></i>  <span class="label label-warning">{{ user.cart.items.count }}</span>
+                        <i class="fa fa-star"></i>  <span class="label label-warning">{{ user.cart.items.count }}</span>
                     </a>
                     </li>
                 {% endif %}

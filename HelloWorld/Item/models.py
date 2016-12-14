@@ -6,49 +6,43 @@ from ..Account.models import Account
 
 
 class Category(models.Model):
-	level = models.IntegerField()
-	name = models.CharField(max_length=200)
-	parentID = models.ForeignKey('self', null=True, blank=True)
+	name = models.CharField(max_length=200, null=True, blank=True)
+	url = models.CharField(max_length=200, null=True, blank=True)
+	address = models.CharField(max_length=200, null=True, blank=True)
+	phone = models.CharField(max_length=200, null=True, blank=True)
 
 	def __unicode__(self):
 		return self.name
-
-
-class BidItem(models.Model):
-	start_time = models.DateTimeField()
-	end_time = models.DateTimeField()
-	reserved_price = models.FloatField()
-	action_price = models.FloatField(null=True, blank=True)
-	current_price = models.FloatField()
-
-	def __unicode__(self):
-		return str(self.end_time)
-
-	@property
-	def _name(self):
-		return self.end_time
 
 
 class Item(models.Model):
 	name = models.CharField(max_length=200)
-	keywords = models.CharField(max_length=200)
-	provider = models.ForeignKey(Account, on_delete=models.CASCADE)
 	listed_price = models.FloatField(null=True, blank=True)
 	amount = models.IntegerField()
 	description_short = models.CharField(max_length=100, null=True, blank=True)
 	description = models.CharField(max_length=1000, null=True, blank=True)
-	bid = models.ForeignKey(BidItem, on_delete=models.CASCADE, null=True, blank=True, related_name="item", unique=True)
 	category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, related_name="items")
+
+	img1 = models.CharField(max_length=200, null=True, blank=True)
+	img2 = models.CharField(max_length=200, null=True, blank=True)
+	img3 = models.CharField(max_length=200, null=True, blank=True)
+	contact = models.CharField(max_length=200, null=True, blank=True)
+	year = models.IntegerField(null=True, blank=True)
+	new_used = models.CharField(max_length=200, null=True, blank=True)
+	make = models.CharField(max_length=200, null=True, blank=True)
+	trim = models.CharField(max_length=200, null=True, blank=True)
+	mile = models.IntegerField(null=True, blank=True)
+	model = models.CharField(max_length=200, null=True, blank=True)
+	style = models.CharField(max_length=200, null=True, blank=True)
+	engine = models.CharField(max_length=200, null=True, blank=True)
+	transmission = models.CharField(max_length=200, null=True, blank=True)
+	ex_color = models.CharField(max_length=200, null=True, blank=True)
+	in_color = models.CharField(max_length=200, null=True, blank=True)
+	vin = models.CharField(max_length=200, null=True, blank=True)
+	stock_num = models.CharField(max_length=200, null=True, blank=True)
 
 	def __unicode__(self):
 		return self.name
-
-	@property
-	def _type(self):
-		if self.listed_price:
-			return 'Sale Item'
-		else:
-			return 'Bid Item'
 
 
 class Rate(models.Model):

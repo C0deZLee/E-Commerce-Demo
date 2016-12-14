@@ -21,46 +21,50 @@
                     </div>
                     {% endif %}
                     <div class="logo-element">
-                        HW
+
                     </div>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Shopping</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="/index/">Recommends</a></li>
-                        <li><a href="form_basic.html">Category 1</a></li>
-                        <li><a href="form_advanced.html">Category 2</a></li>
+                        <li><a href="/index/">Recommended</a></li>
+                        {% for c in cate %}
+                        <li><a href="/index/cate/{{ c.pk }}/">{{ c.name }}</a></li>
+                        {% endfor %}
                     </ul>
+                </li>
+                <li>
+                    <a href="/cart/"><i class="fa fa-star"></i> <span class="nav-label">My Watchlist</span></a>
                 </li>
                 {% if user.is_authenticated %}
-                {% if user.is_seller %}
-                <li>
-                    <a href="#"><i class="fa fa-dollar"></i> <span class="nav-label">Seller</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li >
-                        <a href="#">Post new <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse in">
-                            <li>
-                                <a href="/item/new/n/">List Item</a>
-                            </li>
-                            <li>
-                                <a href="/item/new/">Bid Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                        <li><a href="/sells/">Your Sells</a></li>
-                    </ul>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Profile</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="/cart/">My cart</a></li>
-                        <li><a href="/history/">Purchase history</a></li>
-                        <li><a href="form_basic.html">Change profile</a></li>
-                        <li><a href="/seller_request/">Request become seller</a></li>
-                    </ul>
-                </li>
+{#                {% if user.is_seller %}#}
+{#                <li>#}
+{#                    <a href="#"><i class="fa fa-dollar"></i> <span class="nav-label">Seller</span><span class="fa arrow"></span></a>#}
+{#                    <ul class="nav nav-second-level collapse">#}
+{#                        <li >#}
+{#                        <a href="#">Post new <span class="fa arrow"></span></a>#}
+{#                        <ul class="nav nav-third-level collapse in">#}
+{#                            <li>#}
+{#                                <a href="/item/new/n/">List Item</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="/item/new/">Bid Item</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
+{#                        <li><a href="/sells/">Your Sells</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#                <li>#}
+{#                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Profile</span><span class="fa arrow"></span></a>#}
+{#                    <ul class="nav nav-second-level collapse">#}
+{#                        <li><a href="/cart/">My cart</a></li>#}
+{#                        <li><a href="/history/">Purchase history</a></li>#}
+{#                        <li><a href="form_basic.html">Change profile</a></li>#}
+{#                        <li><a href="/seller_request/">Request become seller</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
             {% endif %}
             </ul>
 

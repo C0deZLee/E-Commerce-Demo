@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load widget_tweaks %}
 {% block content %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Products List</h2>
+            <h2>Car List</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="/index/">Home</a>
                 </li>
                 <li class="active">
-                    <strong>Products List</strong>
+                    <strong>Car List</strong>
                 </li>
             </ol>
         </div>
@@ -20,44 +21,164 @@
 
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            {% for item in item_list %}
-            <div class="col-md-3">
+            <div class="col-lg-12">
                 <div class="ibox">
-                    <div class="ibox-content product-box">
-
-                        <div class="product-imitation">
-                            [ NO IMAGE ]
+                    <div class="ibox-title">
+                        <h5>Filters</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
                         </div>
-                        <div class="product-desc">
-                            <span class="product-price">
-                                {% if item.bid %}
-                                   From ${{ item.bid.current_price }}
-                                {% else %}
-                                    ${{ item.listed_price }}
-                                {% endif %}
-                            </span>
-                            <small class="text-muted">{{ item.category.name }} </small>
-                            <a href="/item/id/{{ item.pk }}/" class="product-name"> {{ item.name }}</a>
-                            <div class="small m-t-xs">
-                                {{ item.description_short|truncatewords:10 }}
+                    </div>
+                    <div class="ibox-content"  style="display: none;">
+                        <form role="form" class="form-horizontal" action="/search/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Price</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="price-min" placeholder="Min" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="price-max" placeholder="Max" class="form-control">
+                                </div>
+                                <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="high" name="price"> Highest First
+                                </label></div>
+                                <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="low" name="price"> Lowest First
+                                </label></div>
                             </div>
-                            <div class="m-t text-righ">
+                            <div class="form-group">
 
-                                <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-primary">More <i class="fa fa-long-arrow-right"></i> </a>
-                               {% if item.bid %} <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-white">End: {{ item.bid.end_time }}</a> {% endif %}
+                                <label class="col-sm-2 control-label">Year</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" name="year-min" placeholder="Min" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="year-max" placeholder="Max" class="form-control">
+                                </div>
+                                 <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="high" name="year"> Highest First
+                                </label></div>
+                                <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="low" name="year"> Lowest First
+                                </label></div>
+                            </div>
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">Mileage</label>
+
+
+                                   <div class="col-sm-2">
+                                    <input type="text" name="mile-min" placeholder="Min" class="form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="mile-max" placeholder="Max" class="form-control">
+                                </div>
+                                 <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="high" name="mile"> Highest First
+                                </label></div>
+                                <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="low" name="mile"> Lowest First
+                                </label></div>
+                            </div>
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">New/Used</label>
+                                 <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="n" name="nu">New
+                                </label></div>
+                                <div class=" col-sm-2">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" value="u" name="nu"> Used
+                                </label></div>
+                            </div>
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">Brand</label>
+                                                <div class="col-sm-2">
+                                    <input type="text" name="brand" placeholder="ex. Ford" class="form-control">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <button ng-click="getData()"
+                                        class="btn btn-primary col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3"
+                                        type="submit">Search!
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in item_list %}
+                <div class="col-md-4">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="product-imitation">
+                                <a href="/item/id/{{ item.pk }}/"><img class="img-responsive" src="{{ item.img1 }}"></a>
+                            </div>
+                            <div class="product-desc">
+                            <span class="product-price">
+                                  {% if item.listed_price != 0.0 %}${{ item.listed_price }}{% else %}Call/Email{% endif %}
+                            </span>
+                                <small class="text-muted">{{ item.category.name }} </small>
+                                <a href="/item/id/{{ item.pk }}/" class="product-name"> {{ item.name }}</a>
+                                <div class="small m-t-xs">
+                                    {{ item.description_short|truncatewords:10 }}
+                                </div>
+                                <div class="m-t text-righ">
+                                    <a href="/item/id/{{ item.pk }}/" class="btn btn-xs btn-outline btn-primary">More <i
+                                            class="fa fa-long-arrow-right"></i> </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {% if forloop.counter|divisibleby:4 %}
-            </div>
-            <div class="row">
-            {% endif %}
+                {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <div class="row">
+                {% endif %}
             {% endfor %}
 
+            </div>
+    {% if page %}
+        <div class="btn-group">
+            <a {% if page == 1 %}disabled{% endif %} href="/index/1/" class="btn btn-white"><i
+                    class="fa fa-chevron-left"></i></a>
+            {% if page != 1 %}
+                <a class="btn btn-white" href="/index/{{ page|add:"-1" }}/">{{ page|add:"-1" }}</a>{% endif %}
+            <a class="btn btn-white active">{{ page }}</a>
+            <a class="btn btn-white" href="/index/{{ page|add:"+1" }}/"> {{ page|add:"+1" }}</a>
+            <a class="btn btn-white" href="/index/{{ page|add:"+2" }}/"> {{ page|add:"+2" }}</a>
+            <a class="btn btn-white" href="/index/{{ page|add:"+3" }}/"> {{ page|add:"+3" }}</a>
+            <a class="btn btn-white" href="/index/{{ page|add:"+1" }}/"><i class="fa fa-chevron-right"></i> </a>
         </div>
+    {% endif %}
     </div>
 {% endblock %}
-
+{% block js %}
+    <script src="{% get_static_prefix %}js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-check').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+{% endblock %}
