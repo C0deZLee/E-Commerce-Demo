@@ -33,10 +33,11 @@
                         {% endfor %}
                     </ul>
                 </li>
+              {% if user.is_authenticated %}
                 <li>
                     <a href="/cart/"><i class="fa fa-star"></i> <span class="nav-label">My Watchlist</span></a>
                 </li>
-                {% if user.is_authenticated %}
+
 {#                {% if user.is_seller %}#}
 {#                <li>#}
 {#                    <a href="#"><i class="fa fa-dollar"></i> <span class="nav-label">Seller</span><span class="fa arrow"></span></a>#}
