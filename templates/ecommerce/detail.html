@@ -15,16 +15,16 @@
 {% block content %}
         <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Products detail</h2>
+            <h2>Car detail</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="/index/">Home</a>
                 </li>
                 <li >
-                    <a href="/index/">Products list</a>
+                    <a href="/index/">Car list</a>
                 </li>
                 <li class="active">
-                    <strong>Products detail</strong>
+                    <strong>Car detail</strong>
                 </li>
             </ol>
         </div>
@@ -43,17 +43,17 @@
                             <div class="product-images">
                                 <div>
                                     <div class="image-imitation">
-                                        [IMAGE 1]
+                                        <img class="img-responsive" src="{{ item.img1 }}">
                                     </div>
                                 </div>
                                 <div>
                                     <div class="image-imitation">
-                                        [IMAGE 2]
+                                       <img class="img-responsive" src="{{ item.img2 }}">
                                     </div>
                                 </div>
                                 <div>
                                     <div class="image-imitation">
-                                        [IMAGE 3]
+                                       <img class="img-responsive" src="{{ item.img3 }}">
                                     </div>
                                 </div>
                             </div>
@@ -63,24 +63,13 @@
                             <h2 class="font-bold m-b-xs">
                                 {{ item.name }}
                             </h2>
-                            <small>{{ item.description_short }}</small>
+                            <small>{{ item.category }}</small>
                             <hr>
                             <div>
+                                <a href="{{ item.contact }}" class="btn btn-primary pull-right">Contact the seller</a>
 
-                            {% if item.bid %}
-                                <form action="/item/id/{{ item.pk }}/addbid" method="post">
-                                {% csrf_token %}
-                                <button {% if not user.is_authenticated %}disabled {% endif %} type="submit" class="btn btn-primary pull-right">Bid</button>
-                                <div class="col-md-2 pull-right ">
-                                  <input class="form-control" id="newbid" type="text" name="newbid" maxlength="100" required />
-                                </div>
-                                </form>
-                                <h1 class="product-main-price">Current <strong>${{ item.bid.current_price }}</strong> <small class="text-muted">Exclude Tax</small> </h1>
-                             {% else %}
-                                <a {% if not user.is_authenticated %}disabled {% endif %} href="/item/id/{{ item.pk }}/addcart" class="btn btn-primary pull-right">Add to cart</a>
+                                <h1 class="product-main-price"><strong>{% if item.listed_price != 0.0 %}${{ item.listed_price }}{% else %}Call/Email{% endif %}</strong> <small class="text-muted">Exclude Tax</small>  </h1>
 
-                                <h1 class="product-main-price"><strong>${{ item.listed_price }}</strong> ({{ item.amount }} Left) <small class="text-muted">Exclude Tax</small>  </h1>
-                            {% endif %}
                             </div>
                             <hr>
                             <h4>Product description</h4>
@@ -89,23 +78,54 @@
                                {{ item.description }}
                             </div>
 
-                            <h4>Rates</h4>
-                                <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                                (no enough info to provide rating)
-                            <dl class="dl-horizontal m-t-md small">
-                                <dt>Description lists</dt>
-                                <dd>A description list is perfect for defining terms.</dd>
-                                <dt>Selled by:</dt>
-                                <dd><strong>{{ item.provider }}</strong></dd>
-                                <dt>Malesuada porta</dt>
-                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                                <dt>Felis euismod semper eget</dt>
-                                <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
-                            </dl>
+                            <h4>Details</h4>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Year</td>
+                                <td>{{ item.year }}</td>
+                            </tr>
+                            <tr>
+                                <td>New/Used</td>
+                                <td>{{ item.new_used }}</td>
+                            </tr>
+                            <tr>
+                                <td>Make</td>
+                                <td>{{ item.make }}</td>
+                            </tr>
+                            <tr>
+                                <td>Mile</td>
+                                <td>{{ item.mile }}</td>
+                            </tr>
+                            <tr>
+                                <td>Style</td>
+                                <td>{{ item.style }}</td>
+                            </tr>
+                            <tr>
+                                <td>VIN</td>
+                                <td>{{ item.vin }}</td>
+                            </tr>
+                            <tr>
+                                <td>Engine</td>
+                                <td>{{ item.engine }}</td>
+                            </tr>
+                              {% if item.in_color %}
+                            <tr>
+                                <td>In Color</td>
+                                <td>{{ item.in_color }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if item.ex_color %}
+                                <td>Ex Color</td>
+                                <td>{{ item.ex_color }}</td>
+                            {% endif %}
+                            </tbody>
+                        </table>
                             <div class="text-right">
                                 <div class="btn-group">
-                                    <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
-                                    <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope"></i> Leave a comment</button>
+                                      <a {% if not user.is_authenticated %}disabled {% endif %} href="/item/id/{{ item.pk }}/addcart" class="btn btn-primary"><i class="fa fa-star"></i> Add to watchlist</a>
+
+                                    <button class="btn btn-white btn" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope"></i> Leave a comment</button>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +135,7 @@
         </div>
     </div>
     <div class="row">
+    {% if rates %}
     <div class="col-lg-12">
         <div class="ibox-content">
             <div>
@@ -140,6 +161,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     </div>
     </div>
 {% endblock %}
@@ -154,8 +176,7 @@
                     <h4 class="modal-title">Comment</h4>
                 </div>
                  <form method="post" action="/item/id/{{ item.pk }}/rate/">
-                                                     {% csrf_token %}
-
+                     {% csrf_token %}
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">

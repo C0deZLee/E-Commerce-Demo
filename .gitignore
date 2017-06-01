@@ -10,3 +10,6 @@ env/
 mysite_nginx.conf
 mysite_uwsgi.ini
 uwsgi_params
+*.sqlite3
+
+*.sqlite3

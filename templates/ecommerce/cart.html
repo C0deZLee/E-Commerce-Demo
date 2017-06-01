@@ -3,14 +3,14 @@
 {% block content %}
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>E-commerce shoping cart</h2>
+                    <h2>My watchlist</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="/index/">Home</a>
                         </li>
 
                         <li class="active">
-                            <strong>Shoping cart</strong>
+                            <strong>Watchlist</strong>
                         </li>
                     </ol>
                 </div>
@@ -22,12 +22,12 @@
         <div class="wrapper wrapper-content animated fadeInRight">
 
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-12">
 
                     <div class="ibox">
                         <div class="ibox-title">
                             <span class="pull-right">(<strong>{{ cart_items.count }}</strong>) items</span>
-                            <h5>Items in your cart</h5>
+                            <h5>Car(s) in your watchlist</h5>
                         </div>
                         {% for item in cart_items %}
                         <div class="ibox-content">
@@ -38,6 +38,7 @@
                                     <tr>
                                         <td width="90">
                                             <div class="cart-product-imitation">
+                                                <img class="img-responsive" src="{{ item.img1 }}">
                                             </div>
                                         </td>
                                         <td class="desc">
@@ -50,113 +51,20 @@
                                                 {{ item.description_short }}
                                             </p>
                                             <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>List is perfect for defining terms.</dd>
+                                                <dt>Description</dt>
+                                                <dd>{{ item.description }}</dd>
                                             </dl>
 
                                             <div class="m-t-sm">
                                                 <a href="/cart/remove/{{ item.pk }}" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
                                             </div>
                                         </td>
-
                                         <td>
-                                            ${{ item.listed_price }}
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                ${{ item.listed_price }}
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Cart Summary</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <span>
-                                Total
-                            </span>
-                            <h2 class="font-bold">
-                                ${{ total }}
-                            </h2>
-
-                            <hr/>
-                            <span class="text-muted small">
-                                *Applicable sales tax may be applied
-                            </span>
-                            <div class="m-t-sm">
-                                <div class="btn-group">
-                                <a href="/checkout/" {% if total is 0 %}disabled{% endif %} class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="row">
-                  <div class="col-md-9">
-                         <div class="ibox">
-                        <div class="ibox-title">
-                            <span class="pull-right">(<strong>{{ bid_items.count }}</strong>) items</span>
-                            <h5>Items biding</h5>
-                        </div>
-                        {% for item in bid_items %}
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table shoping-cart-table">
-
-                                    <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
                                             <h3>
-                                                <a href="#" class="text-navy">
-                                                    {{ item.name }}
-                                                </a>
+                                                ${{ item.listed_price }}
                                             </h3>
-                                            <p class="small">
-                                                {{ item.description_short }}
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Bid end time</dt>
-                                                <dd>{{ item.bid.end_time }}</dd>
-                                            </dl>
+                                                                            <a href="{{ item.contact }}" class="btn btn-primary pull-right">Contact the seller</a>
 
-                                            <div class="m-t-sm">
-                                                <a href="/cart/remove/{{ item.pk }}" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            ${{ item.bid.current_price }}
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                ${{ item.bid.current_price }}
-                                            </h4>
                                         </td>
 
                                     </tr>
@@ -168,7 +76,35 @@
                         {% endfor %}
                     </div>
 
-                  </div>
+                </div>
+{#                <div class="col-md-3">#}
+{##}
+{#                    <div class="ibox">#}
+{#                        <div class="ibox-title">#}
+{#                            <h5>Cart Summary</h5>#}
+{#                        </div>#}
+{#                        <div class="ibox-content">#}
+{#                            <span>#}
+{#                                Total#}
+{#                            </span>#}
+{#                            <h2 class="font-bold">#}
+{#                                ${{ total }}#}
+{#                            </h2>#}
+{##}
+{#                            <hr/>#}
+{#                            <span class="text-muted small">#}
+{#                                *Applicable sales tax may be applied#}
+{#                            </span>#}
+{#                            <div class="m-t-sm">#}
+{#                                <div class="btn-group">#}
+{#                                <a href="/checkout/" {% if total is 0 %}disabled{% endif %} class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{##}
+{#                </div>#}
             </div>
         </div>
 {% endblock %}

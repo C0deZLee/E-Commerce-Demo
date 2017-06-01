@@ -22,6 +22,8 @@ from .Item import views as item_view
 urlpatterns = [
 	url(r'^$', item_view.list_view, name='landing'),
 	url(r'^index/$', item_view.list_view, name='index'),
+	url(r'^index/(?P<page>[0-9]*)/$', item_view.page_list_view, name='page_item'),
+	# url(r'^index/cate/(?P<pk>[0-9]*)/$', item_view.cate_list_view, name='item_categ'),
 
 	# Auth
 	url(r'^login/$', auth_view.login_view, name='login'),
@@ -30,9 +32,10 @@ urlpatterns = [
 	url(r'^seller_request/$', auth_view.become_seller_view, name='seller_request'),
 
 
+
 	# Items
 	url(r'^item/$', item_view.list_view, name='item'),
-	url(r'^item/categ/(?P<categ>[0-9]*)/$', auth_view.login_view, name='item_categ'),
+	# url(r'^item/cate/(?P<cate>[0-9]*)/$', auth_view.login_view, name='item_categ'),
 	url(r'^item/id/(?P<pk>[0-9]*)/$', item_view.detail_view, name='item_id'),
 	url(r'^item/new/n/$', item_view.add_new_item_view, name='item_new'),
 	url(r'^item/id/(?P<pk>[0-9]*)/rate/$', item_view.rate_view, name='item_rate'),
@@ -40,13 +43,13 @@ urlpatterns = [
 	url(r'^history/$', item_view.order_history_view, name='orders'),
 	url(r'^sells/$', item_view.sell_history_view, name='sells'),
 	url(r'^sells/(?P<pk>[0-9]*)/change/$', item_view.change_order_status_view, name='sells'),
-
+	# url(r'^import/$', item_view.import_data_view, name='import'),
+	# url(r'^search/$', item_view.search_view, name='search'),
 
 
 
 	# Cart
 	url(r'^item/id/(?P<pk>[0-9]*)/addcart$', item_view.add_cart_view, name='item_add_cart'),
-	url(r'^item/id/(?P<pk>[0-9]*)/addbid$', item_view.add_bid_view, name='item_add_bid'),
 	url(r'^cart/$', item_view.cart_view, name='item_cart'),
 	url(r'^cart/remove/(?P<pk>[0-9]*)$', item_view.remove_cart_view, name='item_remove_cart'),
 

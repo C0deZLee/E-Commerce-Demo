@@ -23,6 +23,7 @@
             <div id="page-wrapper" class="gray-bg">
                 {% include "component/topbar.html" %} {% block content %}{% endblock content %}
             </div>
+
         </div>
 
         {% block modal %}{% endblock modal %}
@@ -44,17 +45,12 @@
                         progressBar: true,
                         showMethod: 'slideDown',
                         timeOut: 4000
-                    }; { %
-                        if messages %
-                    } { %
-                        for message in messages %
-                    } {
-                        {
-                            message | safe
-                        }
-                    } { % endfor %
-                    } { % endif %
-                    }
+                    };
+                    {% if messages %} 
+                        {% for message in messages %} 
+                          {{ message | safe }}
+                        {% endfor %} 
+                    {% endif %}
 
                 }, 1300);
             })

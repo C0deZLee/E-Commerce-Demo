@@ -1,9 +1,10 @@
 from django.db import models
 
 class Category(models.Model):
-	level = models.IntegerField()
-	name = models.CharField(max_length=200)
-	parentID = models.ForeignKey('self', null=True, blank=True)
+	name = models.CharField(max_length=200, null=True, blank=True)
+	url = models.CharField(max_length=200, null=True, blank=True)
+	address = models.CharField(max_length=200, null=True, blank=True)
+	phone = models.CharField(max_length=200, null=True, blank=True)
 
 	def __unicode__(self):
 		return self.name

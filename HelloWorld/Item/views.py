@@ -1,6 +1,8 @@
+import json
+
 from django.shortcuts import render
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Avg, Sum, Q
 from django.views.decorators.http import require_http_methods
 
@@ -8,8 +10,8 @@ from forms import BidForm
 from models import Item, Rate, Category
 from ..Info.models import Order
 from ..Account.models import Cart
-# Create your views here.
 
+# Create your views here.
 
 
 def list_view(request):
@@ -17,7 +19,24 @@ def list_view(request):
 	return render(request, 'ecommerce/grid.html', {'item_list': item_list, 'title': 'Today'})
 
 
+def page_list_view(request, page):
+	cate = Category.objects.all()
+	item_list = Item.objects.all()[0+int(page)*9:9+int(page)*9]
+	if request.user.is_authenticated:
+		if Cart.objects.filter(user=request.user).count() == 0:
+			cart = Cart()
+			cart.user = request.user
+			cart.save()
+		else:
+			print Cart.objects.filter(user=request.user).count()
+
+	return render(request, 'ecommerce/grid.html', {'item_list': item_list, 'cate': cate, 'page': int(page)})
+
+
+
 def detail_view(request, pk):
+	cate = Category.objects.all()
+
 	try:
 		item = Item.objects.get(pk=pk)
 	except (KeyError, Item.DoesNotExist):
@@ -26,7 +45,8 @@ def detail_view(request, pk):
 
 	rate_num = item.rates.all().aggregate(Avg('num'))['num__avg']
 	rates = item.rates.all()
-	return render(request, 'ecommerce/detail.html', {'item': item, 'rate_num': rate_num, 'rates': rates})
+	return render(request, 'ecommerce/detail.html', {'item': item, 'rate_num': rate_num, 'rates': rates, 'cate' : cate})
+
 
 
 def add_cart_view(request, pk):
@@ -43,7 +63,7 @@ def add_cart_view(request, pk):
 	request.user.cart.items.add(item)
 	request.user.cart.save()
 
-	messages.add_message(request, messages.INFO, "toastr.success('The item is in your cart now', 'Success');")
+	messages.add_message(request, messages.INFO, "toastr.success('The item is in your watchlist now', 'Success');")
 	return HttpResponseRedirect('/item/id/'+pk)
 
 
@@ -69,30 +89,7 @@ def cart_view(request):
 
 	if total is None:
 		total = 0
-	return render(request, 'ecommerce/cart.html', {'cart_items': cart_items, 'total': total, 'bid_items': bid_items})
-
-
-@require_http_methods(['POST'])
-def add_bid_view(request, pk):
-	try:
-		item = Item.objects.get(pk=pk)
-	except (KeyError, Item.DoesNotExist):
-		messages.add_message(request, messages.INFO, "toastr.error('The item you are looking for does not exist', 'Error');")
-		return HttpResponseRedirect('/index/')
-
-	if request.POST['newbid']:
-		newbid = request.POST['newbid']
-		item.bid.current_price = newbid
-		item.bid.save()
-
-		request.user.cart.get().items.add(item)
-		request.user.cart.get().save()
-
-		messages.add_message(request, messages.INFO, "toastr.success('The item is in your cart now', 'Success');")
-		return HttpResponseRedirect('/item/id/'+pk)
-	else:
-		messages.add_message(request, messages.INFO, "toastr.error('Wrong price.', 'Error');")
-		return HttpResponseRedirect('/item/id/'+pk)
+	return render(request, 'ecommerce/cart.html', {'cart_items': cart_items, 'total': total, 'cate' : cate})
 
 
 def add_new_item_view(request):
@@ -112,7 +109,6 @@ def add_new_item_view(request):
 			pass
 		item.amount = request.POST['amount']
 		item.name = request.POST['name']
-		item.bid = None
 		item.category = Category.objects.get(pk=request.POST['cate'])
 		item.description_short = request.POST['dess']
 		item.provider = request.user
@@ -133,10 +129,10 @@ def rate_view(request, pk):
 	except (KeyError, Item.DoesNotExist):
 		messages.add_message(request, messages.INFO, "toastr.error('The item you are looking for does not exist', 'Error');")
 		return HttpResponseRedirect('/index/')
-
-	if item.provider == request.user:
-		messages.add_message(request, messages.INFO, "toastr.error('You cannot buy your own item!', 'Error');")
-		return HttpResponseRedirect('/item/id/'+pk)
+	#
+	# if item.provider == request.user:
+	# 	messages.add_message(request, messages.INFO, "toastr.error('You cannot buy your own item!', 'Error');")
+	# 	return HttpResponseRedirect('/item/id/'+pk)
 
 	rate = Rate()
 	rate.item = item
@@ -151,8 +147,8 @@ def rate_view(request, pk):
 
 
 def checkout_view(request):
-	cart_items = request.user.cart.get().items.filter(bid=None)
-	total = request.user.cart.get().items.filter(bid=None).aggregate(Sum('listed_price'))['listed_price__sum']
+	cart_items = request.user.cart.get().items
+	total = request.user.cart.get().items.aggregate(Sum('listed_price'))['listed_price__sum']
 
 	if request.method == 'POST':
 		if cart_items.count == 0:
@@ -199,6 +195,4 @@ def change_order_status_view(request, pk):
 	else:
 		messages.add_message(request, messages.INFO, "toastr.error('The record you are looking for does not exist', 'Error');")
 
-
 	return HttpResponseRedirect('/sells/')
-
