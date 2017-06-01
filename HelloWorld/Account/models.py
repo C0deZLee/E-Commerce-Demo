@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
-
 class AccountManager(BaseUserManager):
 	def create_user(self, email, password=None, **kwargs):
 		"""
@@ -13,44 +12,34 @@ class AccountManager(BaseUserManager):
 		if not kwargs.get('username'):
 			raise ValueError('Users must have a valid username')
 
-		account = self.model(
-				email=self.normalize_email(email), username=kwargs.get('username')
-		)
-
+		account = self.model(email=self.normalize_email(email), username=kwargs.get('username'))
 		account.set_password(password)
 		account.save()
-
+		# Create Cart for new registered account
+		cart = Cart(user_id = account.id)
+		cart.save()
+		# Create Account Detail for new registered account		
+		deatil = AccountDetail(user_id = account.id)
+		deatil.save()
 		return account
 
 	def create_superuser(self, email, password, **kwargs):
 		account = self.create_user(email, password, **kwargs)
-
 		account.is_admin = True
+		account.is_staff = True
 		account.is_superuser = True
 		account.save()
-
 		return account
-
-
-class Address(models.Model):
-	address1 = models.CharField(max_length=200)
-	address2 = models.CharField(max_length=200, null=True, blank=True)
-	city = models.CharField(max_length=200)
-	zip_code = models.IntegerField()
-	state = models.CharField(max_length=200)
-
 
 class Account(AbstractBaseUser, PermissionsMixin):
 	# Basic
 	email = models.EmailField(unique=True)
 	username = models.CharField(max_length=40, unique=True)
-	gender = models.CharField(max_length=20, null=True, blank=True)
-	mobile = models.IntegerField(null=True, blank=True)
-	address = models.ForeignKey(Address, null=True, blank=True)
+
 	# permission
 	is_admin = models.BooleanField(default=False)
 	is_seller = models.BooleanField(default=False)
-	is_staff = models.BooleanField(default=True)
+	is_staff = models.BooleanField(default=False)
 	# Manager
 	objects = AccountManager()
 	# Timestamp
@@ -85,18 +74,19 @@ class Account(AbstractBaseUser, PermissionsMixin):
 		"Returns the person's last name."
 		return self.username
 
-	@property
-	def date_joined(self):
-		return self.created
+class AccountDetail(models.Model):
+	user = models.OneToOneField('Account', related_name='detail', unique=True)
+	gender = models.CharField(max_length=20, null=True, blank=True)
+	mobile = models.IntegerField(null=True, blank=True)
+	address = models.ForeignKey('Info.Address', null=True, blank=True)
 
-	@property
-	def is_active(self):
-		return self.is_staff
+	def __unicode__(self):
+		return self.user.username
 
+class Cart(models.Model):
+	user = models.OneToOneField('Account', related_name='cart', unique=True)
+	items = models.ManyToManyField('Item.Item', blank=True)
 
-class CreditCard(models.Model):
-	number = models.IntegerField()
-	expire_date = models.DateField()
-	cvv = models.IntegerField()
-	address = models.ForeignKey(Address)
-	owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+	def __unicode__(self):
+		return self.user.username
+

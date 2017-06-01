@@ -6,9 +6,6 @@ from django.http import HttpResponseRedirect
 
 from .forms import UserCreationForm, UserChangeForm
 
-
-# Create your views here.
-
 def login_view(request):
 	'''
 	Login View
@@ -46,7 +43,6 @@ def reg_view(request):
 			return HttpResponseRedirect('/index/')
 	else:
 		form = UserCreationForm()
-			# create user shopping cart
 	return render(request, 'auth/register.html', {'form': form})
 
 

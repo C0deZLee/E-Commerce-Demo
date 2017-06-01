@@ -1,16 +1,11 @@
 from django.contrib import admin
 
-from models import Item, BidItem, Rate, Category, Order
+from models import Item, Rate, Category
 # Register your models here.
 
 
 class ItemAdmin(admin.ModelAdmin):
-	list_display = ['name', 'keywords', 'provider', 'listed_price', '_type']
-
-
-class BidItemAdmin(admin.ModelAdmin):
-	list_display = ['end_time', 'reserved_price', 'action_price']
-
+	list_display = ['name', 'keywords', 'provider', 'listed_price', 'type']
 
 class RateAdmin(admin.ModelAdmin):
 	list_display = ['item', 'rater', 'num', 'created']
@@ -20,13 +15,6 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['pk', 'level', 'name']
 
 
-class OrderAdmin(admin.ModelAdmin):
-	list_display = ('created', 'item', 'buyer', 'status')
-	list_filter = ['created']
-
-
 admin.site.register(Item, ItemAdmin)
-admin.site.register(BidItem, BidItemAdmin)
 admin.site.register(Rate, RateAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Order, OrderAdmin)

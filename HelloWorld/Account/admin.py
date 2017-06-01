@@ -3,13 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 
 from forms import UserChangeForm, UserCreationForm
-from models import Account, Address, CreditCard
+from models import Account, AccountDetail, Cart
 # Register your models here.
-
-
-class CreditCardAdmin(admin.ModelAdmin):
-	list_display = ['number', 'expire_date', 'cvv', 'address', 'owner']
-
 
 class AccountAdmin(UserAdmin):
     # The forms to add and change user instances
@@ -40,13 +35,19 @@ class AccountAdmin(UserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+class AccountDetailAdmin(admin.ModelAdmin):
+    list_display = ['user', 'address']
 
-class AddressAdmin(admin.ModelAdmin):
-    list_display = ['address1', 'address2', 'zip_code', 'state']
+class CartAdmin(admin.ModelAdmin):
+        fieldsets = (
+        (None, {
+        'classes': ('wide',),
+        'fields': ('user', 'items',),
+        }),
+    )
 
 
-admin.site.register(Address, AddressAdmin)
-admin.site.register(CreditCard, CreditCardAdmin)
+admin.site.register(Cart, CartAdmin)
+admin.site.register(AccountDetail, AccountDetailAdmin)
 admin.site.register(Account, AccountAdmin)
-# ... and, since we're not using Django's built-in permissions, unregister the Group model from admin.
 admin.site.unregister(Group)

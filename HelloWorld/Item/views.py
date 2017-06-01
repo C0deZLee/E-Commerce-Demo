@@ -5,22 +5,16 @@ from django.db.models import Avg, Sum, Q
 from django.views.decorators.http import require_http_methods
 
 from forms import BidForm
-from models import Item, BidItem, Rate, Category, Order
-from ..Info.models import Cart
+from models import Item, Rate, Category
+from ..Info.models import Order
+from ..Account.models import Cart
 # Create your views here.
+
 
 
 def list_view(request):
 	item_list = Item.objects.all()[:9]
-	if request.user.is_authenticated:
-		if Cart.objects.filter(user=request.user).count() == 0:
-			cart = Cart()
-			cart.user = request.user
-			cart.save()
-		else:
-			print Cart.objects.filter(user=request.user).count()
-
-	return render(request, 'ecommerce/grid.html', {'item_list': item_list})
+	return render(request, 'ecommerce/grid.html', {'item_list': item_list, 'title': 'Today'})
 
 
 def detail_view(request, pk):
@@ -46,8 +40,8 @@ def add_cart_view(request, pk):
 		messages.add_message(request, messages.INFO, "toastr.error('You cannot buy your own item!', 'Error');")
 		return HttpResponseRedirect('/item/id/'+pk)
 
-	request.user.cart.get().items.add(item)
-	request.user.cart.get().save()
+	request.user.cart.items.add(item)
+	request.user.cart.save()
 
 	messages.add_message(request, messages.INFO, "toastr.success('The item is in your cart now', 'Success');")
 	return HttpResponseRedirect('/item/id/'+pk)
@@ -60,18 +54,18 @@ def remove_cart_view(request, pk):
 		messages.add_message(request, messages.INFO, "toastr.error('The item you are looking for does not exist', 'Error');")
 		return HttpResponseRedirect('/index/')
 
-	request.user.cart.get().items.remove(item)
-	request.user.cart.get().save()
+	request.user.cart.items.remove(item)
+	request.user.cart.save()
 
 	messages.add_message(request, messages.INFO, "toastr.success('The item is removed from your cart.', 'Success');")
 	return HttpResponseRedirect('/cart/')
 
 
 def cart_view(request):
-	cart_items = request.user.cart.get().items.filter(bid=None)
-	total = request.user.cart.get().items.filter(bid=None).aggregate(Sum('listed_price'))['listed_price__sum']
+	cart_items = request.user.cart.items.filter(type=0)
+	total = request.user.cart.items.filter(type=0).aggregate(Sum('listed_price'))['listed_price__sum']
 
-	bid_items = request.user.cart.get().items.filter(~Q(bid=None))
+	bid_items = request.user.cart.items.filter(type=1)
 
 	if total is None:
 		total = 0
@@ -168,14 +162,9 @@ def checkout_view(request):
 		else:
 			for item in cart_items:
 				item.amount -= 1
-				request.user.cart.get().items.remove(item)
-				request.user.cart.get().save()
-				order = Order()
-				order.item = item
-				order.amount = 1
-				order.seller = order.item.provider
-				order.buyer = request.user
-				order.status = 1
+				request.user.cart.items.remove(item)
+				request.user.cart.save()
+				order = Order(item = item, amount = 1, seller = order.item.provider, buyer = request.user, status = 0)
 				order.save()
 			messages.add_message(request, messages.INFO, "toastr.success('Purchase completed.', 'Success');")
 			return HttpResponseRedirect('/history/')
@@ -204,7 +193,7 @@ def change_order_status_view(request, pk):
 		return HttpResponseRedirect('/index/')
 
 	if order.seller == request.user:
-		if order.status != 3:
+		if order.status < 3:
 			order.status += 1
 			order.save()
 	else:

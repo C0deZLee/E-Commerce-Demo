@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
-{% load widget_tweaks %}
-<head>
+    {% load static %} {% load widget_tweaks %}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
 
-    <title>HelloWorld | Revolution of e-commerce</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="{% get_static_prefix %}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% get_static_prefix %}font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="{% get_static_prefix %}css/animate.css" rel="stylesheet">
-    <link href="{% get_static_prefix %}css/style.css" rel="stylesheet">
-    <link href="{% get_static_prefix %}css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    {% block css %}{% endblock %}
+        <title>HelloWorld | Revolution of e-commerce</title>
 
-</head>
+        <link href="{% get_static_prefix %}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{% get_static_prefix %}font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="{% get_static_prefix %}css/animate.css" rel="stylesheet">
+        <link href="{% get_static_prefix %}css/style.css" rel="stylesheet">
+        <link href="{% get_static_prefix %}css/plugins/toastr/toastr.min.css" rel="stylesheet"> {% block css %}{% endblock %}
 
-<body>
-    {% include "component/sidebar.html" %}
-    <div id="wrapper">
-        <div id="page-wrapper" class="gray-bg">
-            {% include "component/topbar.html" %}
-            {% block content %}{% endblock content %}
+    </head>
+
+    <body class="pace-done mini-navbar">
+        {% include "component/sidebar.html" %}
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                {% include "component/topbar.html" %} {% block content %}{% endblock content %}
+            </div>
         </div>
-    </div>
 
-    {% block modal %}{% endblock modal %}
-</div>
+        {% block modal %}{% endblock modal %}
+        </div>
 
-    <script src="{% get_static_prefix %}js/jquery-2.1.1.js"></script>
-    <script src="{% get_static_prefix %}js/bootstrap.min.js"></script>
-    <script src="{% get_static_prefix %}js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="{% get_static_prefix %}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="{% get_static_prefix %}js/jquery-2.1.1.js"></script>
+        <script src="{% get_static_prefix %}js/bootstrap.min.js"></script>
+        <script src="{% get_static_prefix %}js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="{% get_static_prefix %}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script src="{% get_static_prefix %}js/inspinia.js"></script>
-    <script src="{% get_static_prefix %}js/plugins/pace/pace.min.js"></script>
-    <script src="{% get_static_prefix %}js/plugins/toastr/toastr.min.js"></script>
-    <script>
-        $(document).ready(function () {
+        <script src="{% get_static_prefix %}js/inspinia.js"></script>
+        <script src="{% get_static_prefix %}js/plugins/pace/pace.min.js"></script>
+        <script src="{% get_static_prefix %}js/plugins/toastr/toastr.min.js"></script>
+        <script>
+            $(document).ready(function () {
                 setTimeout(function () {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                {% if messages %}
-                    {% for message in messages %}
-                        {{ message|safe }}
-                    {% endfor %}
-                {% endif %}
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    }; { %
+                        if messages %
+                    } { %
+                        for message in messages %
+                    } {
+                        {
+                            message | safe
+                        }
+                    } { % endfor %
+                    } { % endif %
+                    }
 
-            }, 1300);
-        })
-    </script>
-    {% block js %}{% endblock %}
-</body>
+                }, 1300);
+            })
+        </script>
+        {% block js %}{% endblock %}
+    </body>
 
 </html>

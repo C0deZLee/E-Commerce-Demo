@@ -4,3 +4,9 @@
 env/
 .idea/
 *.pyc
+
+*.sqlite3
+
+mysite_nginx.conf
+mysite_uwsgi.ini
+uwsgi_params

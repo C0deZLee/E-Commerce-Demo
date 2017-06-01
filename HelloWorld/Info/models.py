@@ -1,11 +1,31 @@
-from __future__ import unicode_literals
-
 from django.db import models
-# Create your models here.
-from ..Account.models import Address, Account
-from ..Item.models import Item
+
+class CreditCard(models.Model):
+	number = models.IntegerField()
+	expire_date = models.DateField()
+	cvv = models.IntegerField()
+	address = models.ForeignKey('Address')
+	owner = models.ForeignKey('Account.Account', on_delete=models.CASCADE)
+
+class Address(models.Model):
+	address1 = models.CharField(max_length=200)
+	address2 = models.CharField(max_length=200, null=True, blank=True)
+	city = models.CharField(max_length=200)
+	zip_code = models.IntegerField()
+	state = models.CharField(max_length=200)
 
 
-class Cart(models.Model):
-	user = models.ForeignKey(Account, related_name='cart', unique=True)
-	items = models.ManyToManyField(Item, blank=True, null=True)
+class Order(models.Model):
+	STATUS = (
+    	(0, 'Not Shipped'),
+    	(1, 'Shipped'),
+    	(2, 'Delivered')
+  	)
+	created = models.DateTimeField(auto_now=True)
+	amount = models.IntegerField(default=0)
+	item = models.ForeignKey('Item.Item', on_delete=models.CASCADE)
+	buyer = models.ForeignKey('Account.Account', related_name='purchased')
+	seller = models.ForeignKey('Account.Account', related_name='selled')
+	status = models.IntegerField(default=0, choices=STATUS)	
+
+
